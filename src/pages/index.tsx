@@ -31,6 +31,16 @@ const Index = () => {
         }
     }
 
+    const copyClipboard = (value: string) => {
+        navigator.clipboard.writeText(value)
+            .then(() => {
+                console.log("Copy to Clipboard Successful")
+            })
+            .catch(err => {
+                console.log('Copy to Clipboard Error', err);
+            })
+    }
+
     return (
         <>
             <DatePicker
@@ -47,29 +57,39 @@ const Index = () => {
                 </TableRow>
                 <TableRow>
                     <TableBody>default</TableBody>
-                    <TableBody>{moment(startDate).format()}</TableBody>
+                    <TableBody onClick={() => copyClipboard(moment(startDate).format())}>
+                        {moment(startDate).format()}
+                    </TableBody>
                 </TableRow>
                 <TableRow>
                     <TableBody>YYYY年MM月DD日 HH時mm分</TableBody>
-                    <TableBody>{moment(startDate).format('YYYY年MM月DD日 HH時mm分')}</TableBody>
+                    <TableBody onClick={() => copyClipboard(moment(startDate).format('YYYY年MM月DD日 HH時mm分'))}>
+                        {moment(startDate).format('YYYY年MM月DD日 HH時mm分')}
+                    </TableBody>
                 </TableRow>
                 <TableRow>
                     <TableBody>unix timestamp</TableBody>
-                    <TableBody>{moment(startDate).unix()}</TableBody>
+                    <TableBody onClick={() => copyClipboard(moment(startDate).unix().toString())}>
+                        {moment(startDate).unix()}
+                    </TableBody>
                 </TableRow>
                 <TableRow>
                     <TableBody>ISO8601</TableBody>
-                    <TableBody>{moment(startDate).toISOString()}</TableBody>
+                    <TableBody onClick={() => copyClipboard(moment(startDate).toISOString())}>
+                        {moment(startDate).toISOString()}
+                    </TableBody>
                 </TableRow>
                 <TableRow>
                     <TableBody>UTC</TableBody>
-                    <TableBody>{moment(startDate).utc().format()}</TableBody>
+                    <TableBody onClick={() => copyClipboard(moment(startDate).utc().format())}>
+                        {moment(startDate).utc().format()}
+                    </TableBody>
                 </TableRow>
                 <TableRow>
                     <TableBody>Git log</TableBody>
-                    <TableBody>{moment(startDate).format(
-                        'ddd MMM DD HH:mm:ss YYYY ZZ'
-                    )}</TableBody>
+                    <TableBody onClick={() => copyClipboard(moment(startDate).format('ddd MMM DD HH:mm:ss YYYY ZZ'))}>
+                        {moment(startDate).format('ddd MMM DD HH:mm:ss YYYY ZZ')}
+                    </TableBody>
                 </TableRow>
             </Table>
         </>
